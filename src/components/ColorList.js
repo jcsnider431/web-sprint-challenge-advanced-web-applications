@@ -5,16 +5,17 @@ import axiosWithAuth from "../helpers/axiosWithAuth"
 
 
 
+
 const initialColor = {
   color: "",
   code: { hex: "" }
 };
 
-const ColorList = ({ colors, updateColors }) => {
+const ColorList = ({ colors, getColors }) => {
 
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
-  const [id, setId] = useState('')
+  
 
 
   const editColor = color => {
@@ -25,20 +26,12 @@ const ColorList = ({ colors, updateColors }) => {
   const saveEdit = e => {
     e.preventDefault();
     axiosWithAuth()
-      .put(`/colors/${id}`, colorToEdit)
+      .put(`/colors/${colorToEdit.id}`, colorToEdit)
       .then(res => {
-      updateColors(
-        colors.map((item) => {
-          if(item.id === res.data.id){
-            return res.data
-          } else {
-            return item
-          }
-        })
-      )
-    })
+        console.log(res.data)
+      })
       .catch(err => {
-      console.log(err)
+       console.log(err)
     })
   };
 
@@ -46,9 +39,9 @@ const ColorList = ({ colors, updateColors }) => {
 
   const deleteColor = color => {
     axiosWithAuth()
-      .delete(`/colors/${id}`, color)
+      .delete(`/colors/${color.id}`, color)
       .then(res => {
-      updateColors(res.data)
+      getColors(res.data)
     })
       .catch(err => {
       console.log(err)
@@ -61,11 +54,12 @@ const ColorList = ({ colors, updateColors }) => {
       <p>colors</p>
       <ul>
         {colors.map(color => (
-          <li key={color.color} onClick={() =>
-            editColor(color)}>
+          <li key={color.color} onClick={() => {
+            editColor(color)}}>
             <span>
               <span className="delete" onClick={e => {
                     e.stopPropagation();
+                    // setId(color.id)
                     deleteColor(color)
                   }
                 }>
