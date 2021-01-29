@@ -59,7 +59,6 @@ const ColorList = ({ colors, getColors }) => {
             <span>
               <span className="delete" onClick={e => {
                     e.stopPropagation();
-                    // setId(color.id)
                     deleteColor(color)
                   }
                 }>
