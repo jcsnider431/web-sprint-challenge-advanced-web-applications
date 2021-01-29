@@ -12,7 +12,7 @@ test("Renders BubblePage without errors", () => {
 test("Fetches data and renders the bubbles on mounting", () => {
   // Finish this test
   render(<BubblePage/>)
-  expect((<Bubbles/>).toBeVisible)
+  expect((<Bubbles/>).toBeInTheDocument)
 });
 
 //Task List
