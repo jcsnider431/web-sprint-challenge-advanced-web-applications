@@ -1,7 +1,7 @@
-import React, { useState, useHistory } from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import { useHistory } from 'react-router-dom'
 
-const history = useHistory()
 
 const initialValues = {
   username: '',
@@ -17,7 +17,7 @@ const Login = (e) => {
   const [formValues, setFormValues] = useState(initialValues)
 
 
- 
+  const history = useHistory()
 
 
    const handleChanges = (e) => {
@@ -39,7 +39,6 @@ const Login = (e) => {
       console.log(err)
     })
    }
-
   return (
     <>
         <div className='container'>
